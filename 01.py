@@ -1,7 +1,7 @@
 import tornado.web
 import tornado.ioloop
 import tornado.httpserver
-import tornado.options
+import config
 
 # 获取参数的方法
 # 好我们可以先写一个
@@ -16,14 +16,14 @@ class IndexHandler(tornado.web.RequestHandler):
 
 
 if __name__ == '__main__':
-    tornado.options.parse_config_file("config")
+
     # 可以打印一下list
-    print('list->', tornado.options.options.list)
+    print('list->', config.options.list)
     app = tornado.web.Application([(r"/", IndexHandler)])
 
     httpServer = tornado.httpserver.HTTPServer(app)
     # 使用变量的值
-    httpServer.bind(tornado.options.options.port)
+    httpServer.bind(config.options.list)
 
     httpServer.start(1)
 
