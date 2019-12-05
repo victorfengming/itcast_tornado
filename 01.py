@@ -1,52 +1,54 @@
 import tornado.web
-'''
-tornado的基础web框架模块
-'''
 import tornado.ioloop
-'''
-tornado的核心IO循环模块,
-封装了Linux的epoll和BSD的kqueue
-这个是tornado高效的基础
-'''
-
-# 引入httpserver模块
 import tornado.httpserver
 
-# 业务处理类
-# 类比Django的视图
+
 class IndexHandler(tornado.web.RequestHandler):
     '''
     主页处理函数
     '''
-
-    # 处理GET请求的
+    
     def get(self):
         '''
         这个get不是随便写的,是框架提前定义好的
         :return:
         '''
-        # 对应HTTP请求的方法
-        # 给浏览器响应信息
+        
+        
         self.write("main page info tornado!")
 
-
 if __name__ == '__main__':
-    # 这个路由和django差不多,只不过这个调用的是一个类
-    # 实例化app应用对象
-    # Application是tornado框架的核心,与服务器对接的接口
-    # 里面保存了路由映射表,有一个listen方法,用来创建一个HTTP服务器的实例,并绑定了端口
     app = tornado.web.Application([(r"/",IndexHandler)])
+    
 
-    # 这个只是绑定在8000端口,注意:并没有进行监听奥
-    # app.listen(8000)
-    # 实例化一个http服务器对象
     httpServer = tornado.httpserver.HTTPServer(app)
-    # 绑定端口
-    httpServer.listen(8000)
-    # 这个和上面的listen可不一样,两个对象的方法,不同
-    # 说白了,上面的一行,相当于我们这个两行代码的和
-    # 这也就是tornado不用像Django那样加上runserver参数启动服务器了
-    # 以为代码中写了
+    
+    # httpServer.listen(8000)
+    # 这里不用listen了,我们用bind
+    # 将服务器绑定到指定的端口上
+    httpServer.bind(8000)
+    # 这里我写几个就开几个进程
+    '''
+    默认开启一个进程
+    如果大于0,开启多个进程
+    值为none或者小于等于0的话,就开启对应硬件机器CPU核心数的子进程
+    '''
+    httpServer.start(5)
+    # 这个bind和start加一起就相当于 httpServer.listen(8000)了
+    # 近期你可以多些一点,以为你要对于创建服务器的流程有一个了解,以后随便写
+
+
+    # app.listen() 只能在单继承模式中使用
+    '''
+    多进程: 虽然tornado给我们提供了一次性启动多进程的方式,
+        但是由于一些原因,我们不建议使用这种方式,来启动多进程,
+        而是手动启动多进程,并且还能绑定多个端口
+    多进程有三个问题:
+        1. 每个紫禁城都会从父进程中复制出一份IOloop的实例,
+            如果在创建紫禁城钱,修改了IOloop,会影响到所有的紫禁城实例
+        2. 所有的进程都是由一个命令启动的,无法做到在不停止服务的情况下修改代码,这样不好
+        3. 所有进程共享一个端口,想要进行监控,有点难
+    我自己来启动的话,能在一个进程运行后,修改源代码,来单独在运行一遍,也OK
+    '''
 
     tornado.ioloop.IOLoop.current().start()
-
