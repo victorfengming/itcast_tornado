@@ -7,8 +7,6 @@ class Application(tornado.web.Application):
             (r"/", index.IndexHandler),
 
 
-            tornado.web.url(r"/dopostfile", index.DoPostfileHandler, name='dopostfile'),
-
             # POST
             tornado.web.url(r"/postfile", index.PostfileHandler, name='postfile'),
 

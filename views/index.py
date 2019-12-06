@@ -29,10 +29,21 @@ class GoodHandler(RequestHandler):
 
 
 
-class DoPostfileHandler(RequestHandler):
-    # 这里执行接受post参数的操作
-    pass
+
 class PostfileHandler(RequestHandler):
 
     def get(self):
         self.render("index/postfile.html")
+
+
+    # 这个地方就比Django厉害了,一个url就能收不同的请求
+    def post(self):
+        # 接受参数,刚才那个不是叫做get_query么,看这回的
+        username = self.get_body_argument("username")
+        password = self.get_body_argument("password")
+        hobby = self.get_body_arguments("hobby")
+        self.write("哈哈,post成了!")
+        self.write(username+"--------")
+        self.write(password+"--------")
+        for i in hobby:
+            self.write(i+"--------")
