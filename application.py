@@ -3,13 +3,12 @@ from views import index
 
 class Application(tornado.web.Application):
     def __init__(self,settings):
+
         handlers = [
             (r"/", index.IndexHandler),
-
-            # 上传文件
-            tornado.web.url(r"/write", index.WriteHandler),
+            # 渲染
+            (r"/home", index.HomeIndexHandler),
 
         ]
-
 
         super(Application, self).__init__(handlers,template_path=settings["template_path"])
