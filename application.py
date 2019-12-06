@@ -6,10 +6,8 @@ class Application(tornado.web.Application):
         handlers = [
             (r"/", index.IndexHandler),
 
-
-
-            # request对象
-            tornado.web.url(r"/zhuyin", index.ZhuYinHandler),
+            # 上传文件
+            tornado.web.url(r"/upfile", index.UpFileHandler),
 
         ]
 
