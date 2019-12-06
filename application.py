@@ -7,7 +7,7 @@ class Application(tornado.web.Application):
             (r"/", index.IndexHandler),
 
             # 上传文件
-            tornado.web.url(r"/upfile", index.UpFileHandler),
+            tornado.web.url(r"/write", index.WriteHandler),
 
         ]
 
