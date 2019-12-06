@@ -8,7 +8,7 @@ from application import Application
 
 
 if __name__ == '__main__':
-    app = Application()
+    app = Application(config.settings)
     httpServer = tornado.httpserver.HTTPServer(app)
     httpServer.bind(config.options["port"])
     httpServer.start(1)
