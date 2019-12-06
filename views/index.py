@@ -65,3 +65,15 @@ class KaigeHandler(RequestHandler):
 
     def get(self):
         self.write("hansklg kaige !")
+
+class GoodHandler(RequestHandler):
+
+    def get(self,p1,p3,p2):
+
+        self.write("GoodHandler kaige !")
+        self.write("<br>")
+        self.write(p3)
+        self.write("<br>")
+        self.write(p2)
+        self.write("<br>")
+        self.write(p1)
