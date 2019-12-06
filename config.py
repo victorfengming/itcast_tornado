@@ -13,4 +13,5 @@ settings = {
     'static_path' : os.path.join(BASE_DIR,"static"),
     'template_path' : os.path.join(BASE_DIR,"templates"),
     "debug" : True
+    # "autoreload" : True
 }
