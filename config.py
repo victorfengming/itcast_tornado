@@ -1,6 +1,10 @@
-# 参数 字典类型的了
-
+# 参数
 options = {
-    "port": 8080,
-    "list": ["good", "nice", "handsome"]
+    "port": 8080
+}
+
+# 配置
+settings = {
+    # static_path = "/",
+    "debug" : True
 }
