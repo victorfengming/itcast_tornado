@@ -1,5 +1,6 @@
+import os
 from typing import Any
-
+from config import BASE_DIR
 from tornado.web import RequestHandler
 
 
@@ -8,10 +9,21 @@ class IndexHandler(RequestHandler):
         self.write("main page info tornado!")
 
 
+'''
+{
+    'file': [
+        {'filename': 'a.txt',
+         'body': b'suck is a wonderful man',
+          'content_type': 'text/plain'
+        },
 
-
-
-
+        {'filename': 'reg.md',
+          'body': b'x9xa0',
+           'content_type': 'application/octet-stream'
+        }
+    ]
+}
+'''
 
 class UpFileHandler(RequestHandler):
 
@@ -22,14 +34,14 @@ class UpFileHandler(RequestHandler):
         self.write("上传成功!")
         self.write("上传内容是:")
         contents = self.request.files
-        print(contents)
-        print(contents.values())
-        for content in list(contents.values())[0]:
-            filename = content["filename"]
-            body = content["body"]
-            type = content["content_type"]
-            self.write("filename:" + str(filename))
-            self.write("body:" + str(body))
-            self.write("type:"+str(type))
-            self.write("-------------------<br>")
+        for content in contents:
+            fileArr = contents[content]
+            for fileObj in fileArr:
+                # 存储路径
+                file_path = os.path.join(BASE_DIR,"upfile/"+fileObj.filename)
+                with open(file_path,"wb") as f:
+                    f.write(fileObj.body)
+                print("文件写入成功")
+
+
 
