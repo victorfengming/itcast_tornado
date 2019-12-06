@@ -77,3 +77,14 @@ class GoodHandler(RequestHandler):
         self.write(p2)
         self.write("<br>")
         self.write(p1)
+
+
+class ZhangManYuHandler(RequestHandler):
+
+    def get(self):
+        a = self.get_query_argument("a")
+        b = self.get_query_argument("b")
+        c = self.get_query_argument("c")
+        self.write("zzhangmanyu!!! is a good woman")
+        self.write(a+b+c)
+
