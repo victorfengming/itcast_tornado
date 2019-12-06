@@ -17,3 +17,10 @@ class SunckHandler(RequestHandler):
         print(self.name)
         self.write("sunck page info tornado!")
 
+
+class StatusHandler(RequestHandler):
+
+    def get(self):
+        self.set_status(999,"我是谁,我在哪,我要干神马")
+        self.write("status page info tornado!")
+
