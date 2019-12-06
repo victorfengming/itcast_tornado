@@ -7,8 +7,9 @@ class Application(tornado.web.Application):
             (r"/", index.IndexHandler),
 
 
-            # POST
-            tornado.web.url(r"/postfile", index.PostfileHandler, name='postfile'),
+
+            # request对象
+            tornado.web.url(r"/zhuyin", index.ZhuYinHandler),
 
         ]
 
