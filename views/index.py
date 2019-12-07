@@ -22,7 +22,7 @@ class CartHandler(RequestHandler):
 # 数据库
 class StudentsHandler(RequestHandler):
     def get(self):
-        # 去数据库中提取数据
+        # 先整个数据试试
         stus = [
             {"name": "张三", "age": 21, "sex": "man"},
             {"name": "李四", "age": 23, "sex": "woman"},
@@ -30,4 +30,27 @@ class StudentsHandler(RequestHandler):
             {"name": "田七", "age": 17, "sex": "woman"},
             {"name": "王五", "age": 19, "sex": "woman"},
         ]
+
+
+
+        # sql语句
+        sql = "select * from students"
+        # 去数据库中提取数据
+        stus = self.application.db.get_all_obj(sql, "students")
+        print(stus)
+        # 打印出来的结果
+        # 数据库里面的数据是这样的
+        '''
+        [
+            {'name': '张三', 'age': 15, 'sex': '男'}, 
+            {'name': '李四', 'age': 18, 'sex': '女'},
+            {'name': '赵柳', 'age': 24, 'sex': '男'},
+            {'name': '知乎', 'age': 19, 'sex': '男'},
+            {'name': 'Nancy', 'age': 21, 'sex': '女'},
+            {'name': '小强', 'age': 23, 'sex': '未知'}
+         ]
+        '''
+        # 这个get_all_obj挺好用的了,你还可以用这个get_all
+        # 只不过这个get_all返回的是元组类型的数据,
+        # 不太方便你在这个前台页面的遍历和展示
         self.render("students.html", stus=stus)

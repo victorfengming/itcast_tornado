@@ -6,6 +6,15 @@ BASE_DIR = os.path.dirname(__file__)
 options = {
     "port": 8080
 }
+
+mysql = {
+    "host":"127.0.0.1",
+    "user":"root",
+    "passwd":"",
+    "dbName":"mydb",
+
+}
+
 settings = {
     # 这写key的名字可不是随便起的奥,是写好的,
     # 就像upfile就没有,你写了也白扯

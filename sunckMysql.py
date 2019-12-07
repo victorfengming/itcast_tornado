@@ -20,6 +20,7 @@ class SunckMySQL():
     passwd = config.mysql["passwd"]
     dbName = config.mysql["dbName"]
 
+
     def connet(self):
         self.db = pymysql.connect(self.host, self.user, self.passwd, self.dbName)
         self.cursor = self.db.cursor()
