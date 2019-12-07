@@ -17,3 +17,7 @@ class TranHandler(RequestHandler):
     def get(self):
         str = "<h1>能不能转义就看这会的了</h1>"
         self.render("trans.html",str = str)
+
+class CartHandler(RequestHandler):
+    def get(self):
+        self.render("cart.html")
