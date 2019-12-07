@@ -11,4 +11,4 @@ class Application(tornado.web.Application):
 
         ]
 
-        super(Application, self).__init__(handlers,template_path=settings["template_path"])
+        super(Application, self).__init__(handlers,template_path=settings["template_path"],static_path=settings["static_path"])
