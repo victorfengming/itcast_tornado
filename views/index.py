@@ -6,19 +6,8 @@ class IndexHandler(RequestHandler):
         self.write("main page info tornado!")
 class HomeIndexHandler(RequestHandler):
     def get(self):
-        temp = 100
-        # 直接传一个变量就行
-        per = {
-            "name":"victor",
-            "age":21,
-        }
-        flag = 0
-        stus = [
-            "张三",
-            "李四",
-            "王五",
-            "赵柳",
-            "田七",
-        ]
-        self.render("home.html",num = temp,**per,flag = flag,stus = stus)
-        # self.render("home.html")
+
+        def funcSum(a,b):
+            return a + b
+
+        self.render("home.html",func = funcSum)
