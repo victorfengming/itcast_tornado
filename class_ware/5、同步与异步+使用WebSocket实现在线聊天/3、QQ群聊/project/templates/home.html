@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>聊天界面</title>
+    <script type="text/javascript" charset="utf-8" src="{{static_url('js/jquery.min.js')}}"></script>
+</head>
+<body>
+    <div id="contents" style="width:500px;height:500px;overflow:auto"></div>
+    <div>
+        <input type="text" id="message"/>
+        <button onclick="sendMessage()">发送</button>
+    </div>
+    <script>
+        //建立WebSocket链接
+        var ws = new WebSocket("ws://10.0.144.21:8000/chat")
+        //接收服务器的消息
+        ws.onmessage = function(e){
+            $('#contents').append("<p>"+e.data+"</p>")
+        }
+        //向服务器发送消息
+        function sendMessage(){
+            var message = $('#message').val()
+            ws.send(message)
+            $('#message').val("")
+        }
+    </script>
+</body>
+</html>

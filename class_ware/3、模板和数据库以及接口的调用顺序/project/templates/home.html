@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <!--<link rel="stylesheet" href="static/css/home.css">-->
+     <link rel="stylesheet" href="{{static_url('css/home.css')}}">
+</head>
+<body>
+    <h1>这里是home页面</h1>
+    <h1>num: {{ num }}</h1>
+    <h1>num + 10: {{ num + 10 }}</h1>
+
+    <h1>{{age}}</h1>
+
+    {% if flag == 1 %}
+    <h1>sunck is a good man</h1>
+    {% end %}
+
+    <ul>
+        {% for stu in stus %}
+        <li>{{stu["name"]}}</li>
+        {% end %}
+    </ul>
+
+
+
+
+</body>
+</html>
