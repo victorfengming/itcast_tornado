@@ -13,5 +13,12 @@ class HomeIndexHandler(RequestHandler):
             "age":21,
         }
         flag = 0
-        self.render("home.html",num = temp,**per,flag = flag)
+        stus = [
+            "张三",
+            "李四",
+            "王五",
+            "赵柳",
+            "田七",
+        ]
+        self.render("home.html",num = temp,**per,flag = flag,stus = stus)
         # self.render("home.html")
