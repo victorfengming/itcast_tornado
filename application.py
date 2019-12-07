@@ -8,6 +8,7 @@ class Application(tornado.web.Application):
             (r"/", index.IndexHandler),
             # 渲染
             (r"/home", index.HomeIndexHandler),
+            (r"/tran", index.TranHandler),
 
         ]
 

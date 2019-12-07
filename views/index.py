@@ -11,3 +11,9 @@ class HomeIndexHandler(RequestHandler):
             return a + b
 
         self.render("home.html",func = funcSum)
+
+
+class TranHandler(RequestHandler):
+    def get(self):
+        str = "<h1>能不能转义就看这会的了</h1>"
+        self.render("trans.html",str = str)
