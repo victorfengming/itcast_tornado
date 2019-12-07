@@ -8,5 +8,10 @@ class HomeIndexHandler(RequestHandler):
     def get(self):
         temp = 100
         # 直接传一个变量就行
-        self.render("home.html",num = temp)
+        per = {
+            "name":"victor",
+            "age":21,
+        }
+        flag = 0
+        self.render("home.html",num = temp,**per,flag = flag)
         # self.render("home.html")
