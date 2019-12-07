@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息</title>
+    <link rel="stylesheet" href="{{static_url('css/index.css')}}">
+</head>
+<body>
+<div>
+    <ul>
+        <li>姓名|年龄|性别</li>
+        {% for stu in stus %}
+            <li>
+                {{ stu["name"] }}|
+                {{ stu["age"] }}|
+                {{ stu["sex"] }}
+            </li>
+        {% end %}
+
+    </ul>
+</div>
+</body>
+</html>
