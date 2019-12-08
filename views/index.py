@@ -32,12 +32,13 @@ class StudentsHandler(RequestHandler):
         ]
 
 
+        #
+        # # sql语句
+        # sql = "select name,age from students"
+        # # 去数据库中提取数据
+        # stus = self.application.db.get_all_obj(sql, "students","name","age")
 
-        # sql语句
-        sql = "select * from students"
-        # 去数据库中提取数据
-        stus = self.application.db.get_all_obj(sql, "students")
-        print(stus)
+        # print(stus)
         # 打印出来的结果
         # 数据库里面的数据是这样的
         '''
@@ -53,4 +54,9 @@ class StudentsHandler(RequestHandler):
         # 这个get_all_obj挺好用的了,你还可以用这个get_all
         # 只不过这个get_all返回的是元组类型的数据,
         # 不太方便你在这个前台页面的遍历和展示
+
+        # 插入一条数据
+        ins_sql = "insert into students values('Nancy',22,'gril')"
+        stus = self.application.db.insert(ins_sql)
+        print(stus)
         self.render("students.html", stus=stus)
