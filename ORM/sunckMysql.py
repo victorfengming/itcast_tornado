@@ -3,15 +3,12 @@ import config
 
 
 def singleton(cls, *args, **kwargs):
-    instances = {}
-
-    def _singleton():
-        if cls not in instances:
-            instances[cls] = cls(*args, **kwargs)
-        return instances[cls]
-
-    return _singleton
-
+  instances = {}
+  def _singleton():
+    if cls not in instances:
+      instances[cls] = cls(*args, **kwargs)
+    return instances[cls]
+  return _singleton
 
 @singleton
 class SunckMySQL():
@@ -20,11 +17,9 @@ class SunckMySQL():
     passwd = config.mysql["passwd"]
     dbName = config.mysql["dbName"]
 
-
     def connet(self):
         self.db = pymysql.connect(self.host, self.user, self.passwd, self.dbName)
         self.cursor = self.db.cursor()
-
     def close(self):
         self.cursor.close()
         self.db.close()
@@ -59,12 +54,12 @@ class SunckMySQL():
                 fieldsList.append(item)
         else:
             fieldsSql = "select COLUMN_NAME from information_schema.COLUMNS where table_name = '%s' and table_schema = '%s'" % (
-                tableName, self.dbName)
+            tableName, self.dbName)
             fields = self.get_all(fieldsSql)
             for item in fields:
                 fieldsList.append(item[0])
 
-        # 执行查询数据sql
+        #执行查询数据sql
         res = self.get_all(sql)
         for item in res:
             obj = {}
@@ -75,16 +70,16 @@ class SunckMySQL():
             resList.append(obj)
         return resList
 
+
+
+
     def insert(self, sql):
         return self.__edit(sql)
-
     def update(self, sql):
         return self.__edit(sql)
-
     def delete(self, sql):
         return self.__edit(sql)
-
-    def __edit(self, sql):
+    def __edit(self,sql):
         count = 0
         try:
             self.connet()
