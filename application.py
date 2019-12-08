@@ -12,6 +12,8 @@ class Application(tornado.web.Application):
 
             # 普通cookie
             (r"/pcookie", index.PcookieHandler),
+            # 获取cookie
+            (r"/getpcookie", index.GetPCookieHandler),
 
         ]
 
