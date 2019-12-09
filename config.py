@@ -20,8 +20,10 @@ settings = {
     # 就像upfile就没有,你写了也白扯
     'template_path': os.path.join(BASE_DIR, "templates"),
     'static_path': os.path.join(BASE_DIR, "static"),
-    "debug": True
+    "debug": True,
     # "autoreload" : True
+    "cookie_secret":"j94bbx0zSY6yYkCgawwJ1bzyM4jzDUuKtLyPC/MMmZA=",
+    # 这个据说一百亿年才能,用完
 }
 
 # 配置

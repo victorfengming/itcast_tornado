@@ -27,3 +27,28 @@ class GetPCookieHandler(RequestHandler):
         self.write("getcookie page info tornado!")
         self.write(cookie)
 
+# 清除cookie
+class ClearPCookieHandler(RequestHandler):
+    def get(self):
+        # 这个删除cookie后,他这次不能决定
+        # 是下一次删除了
+        # 清除一个cookie
+        self.clear_cookie("suck")
+        # 清除所有cookie
+        self.clear_all_cookies()
+        self.write("ClearPCookieHandler page info tornado!")
+
+# 安全cookie
+class SCookieHandler(RequestHandler):
+    def get(self):
+        self.set_secure_cookie("victor","nice")
+        self.write("SCookieHandler page info tornado!")
+
+# 获取安全cookie
+class GetSCookieHandler(RequestHandler):
+    def get(self):
+        sc = self.get_secure_cookie("victor")
+        print(sc)
+        self.write("getSCookieHandler page info tornado!")
+        self.write(sc)
+
