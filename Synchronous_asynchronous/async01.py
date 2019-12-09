@@ -33,6 +33,17 @@ def longIO():
 为了解决这个问题,我们需要写一个函数,这个函数叫做回调函数
 '''
 
+# 装饰器还会写么
+def genCoroutine(func):
+    # 这个是带有参数的装饰器
+    def wapper(*args,**kwargs):
+        # 其实说白了还是那三句话
+        global gen
+        gen = func(*args,**kwargs)  # 生成一个生成器
+        next(gen)  # 执行reqA
+    return wapper
+
+@genCoroutine
 def reqA():
     print("开始处理reqA")
     res = yield longIO()
@@ -49,10 +60,10 @@ def reqB():
 
 def main():
     # 这就是同步在处理
-    global gen
-    gen = reqA()    # 生成一个生成器
-    next(gen)   # 执行reqA
-
+    # global gen
+    # gen = reqA()    # 生成一个生成器
+    # next(gen)   # 执行reqA
+    reqA()
     reqB()
     while True:
         '''
