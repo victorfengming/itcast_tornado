@@ -11,13 +11,15 @@ import time
 # 添加一个耗时的操作
 def longIO():
     print("开始耗时操作")
-    time.sleep(5)
+    time.sleep(3)
     print("结束耗时操作")
+    return "victor is a wonderful man"
 
 
 def reqA():
     print("开始处理reqA")
-    longIO()
+    res = longIO()
+    print("接受到longIO的响应数据:", res)
     print("结束处理reqA")
 
 
