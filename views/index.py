@@ -77,3 +77,10 @@ class PostFileHandler(RequestHandler):
             count = '0'
         self.set_cookie("count", count)
         self.redirect("/cookienum")
+
+# 设置XsrfCookieHandler
+class SetXsrfCookieHandler(RequestHandler):
+    def get(self):
+        # 设置一个_xsrf的cookie
+        self.xsrf_token
+        self.finish("OK")

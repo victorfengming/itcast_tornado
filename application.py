@@ -23,6 +23,8 @@ class Application(tornado.web.Application):
             (r"/cookienum", index.CookieNumHandler),
             # postfile
             (r"/postfile", index.PostFileHandler),
+            # 设置_xsrfcookie
+            (r"/setxsrfcookie", index.SetXsrfCookieHandler),
 
         ]
 
