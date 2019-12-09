@@ -3,29 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Post page</title>
+<!--    导入jQuery-->
+
 </head>
 <body>
-    <form action="/postfile" method="post">
-        <input id="hi" type="hidden" name="_xsrf" value="">
-        姓名:<input type="text" name="username">
-        <hr/>
-        密码:<input type="password" name="password">
-        <hr/>
-        <input type="submit" value="登录">
-    </form>
-    <script>
-        function getCookie(name) {
-            // 这里写的就不用管他是啥意思了
-            var cook = document.cookie.match("\\b" + name + "=([^;]*)\\b");
-            // 我们要返回的是cookie,不是cook
-            // 如果有,那我就拿他的第一个值,就是这个cookie值
-            return cook ? cook[1] : undefined
-        }
 
-        gc = getCookie("_xsrf");
-        console.log(gc);
-        document.getElementById("hi").value = gc;
-    </script>
+<input id="hi" type="hidden" name="_xsrf" value="">
+姓名:<input type="text" name="username">
+<hr/>
+密码:<input type="password" name="password">
+<hr/>
+<input type="submit" value="登录">
+<button id="btn" onclick="login()">登录</button>
+<script>
+    function getCookie(name) {
+        // 这里写的就不用管他是啥意思了
+        var cook = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+        // 我们要返回的是cookie,不是cook
+        // 如果有,那我就拿他的第一个值,就是这个cookie值
+        return cook ? cook[1] : undefined
+    }
+
+    function login() {
+        btn = document.getElementById("btn");
+        console.log("*************");
+        console.log(btn);
+    }
+</script>
 </body>
 
 </html>
