@@ -9,6 +9,8 @@ class Application(tornado.web.Application):
         handlers = [
 
             (r'/students1', index.Students1Handler),
+            (r'/students2', index.Students2Handler),
+            (r'/students3', index.Students3Handler),
             (r'/home', index.HomeHandler),
 
             (r'/(.*)$', index.StaticFileHandler,

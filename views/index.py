@@ -29,7 +29,7 @@ class Students1Handler(RequestHandler):
         # 获取所有学生的信息
         # time.sleep(30)
         # 创建客户端
-        url = "http://127.0.0.1:8080/home"
+        url = "http://s.budejie.com/topic/tag-topic/64/hot/budejie-android-6.6.9/0-20.json?market=xiaomi&ver=6.6.9&visiting=&os=7.1.1&appname=baisibudejie&client=android&udid=863254032906009&mac=02%3A00%3A00%3A00%3A00%3A00"
         print("url是",url)
         client = AsyncHTTPClient()
         print("客户端创建成功")
@@ -37,6 +37,38 @@ class Students1Handler(RequestHandler):
 
         self.write("students info content!")
 
+
+
+
+class Students2Handler(RequestHandler):
+    @tornado.gen.coroutine
+    def get(self, *args, **kwargs):
+        url = "http://s.budejie.com/topic/tag-topic/64/hot/budejie-android-6.6.9/0-20.json?market=xiaomi&ver=6.6.9&visiting=&os=7.1.1&appname=baisibudejie&client=android&udid=863254032906009&mac=02%3A00%3A00%3A00%3A00%3A00"
+        client = AsyncHTTPClient()
+        res = yield client.fetch(url)
+        if res.error:
+            self.send_error(500)
+        else:
+            data = json.loads(res.body)
+            self.write(data)
+
+
+class Students3Handler(RequestHandler):
+    @tornado.gen.coroutine
+    def get(self, *args, **kwargs):
+        res = yield self.getData()
+        self.write(res)
+
+    @tornado.gen.coroutine
+    def getData(self):
+        url = "http://s.budejie.com/topic/tag-topic/64/hot/budejie-android-6.6.9/0-20.json?market=xiaomi&ver=6.6.9&visiting=&os=7.1.1&appname=baisibudejie&client=android&udid=863254032906009&mac=02%3A00%3A00%3A00%3A00%3A00"
+        client = AsyncHTTPClient()
+        res = yield client.fetch(url)
+        if res.error:
+            ret = {"ret":0}
+        else:
+            ret = json.loads(res.body)
+        raise tornado.gen.Return(ret)
 class HomeHandler(RequestHandler):
     def get(self):
         # 获取所有学生的信息
