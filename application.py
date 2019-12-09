@@ -19,6 +19,8 @@ class Application(tornado.web.Application):
             (r"/scookie", index.SCookieHandler),
             # 获取安全cookie
             (r"/getscookie", index.GetSCookieHandler),
+            # cookie计数,记录浏览器访问次数
+            (r"/cookienum", index.CookieNumHandler),
 
         ]
 

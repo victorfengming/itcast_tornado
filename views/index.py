@@ -52,3 +52,23 @@ class GetSCookieHandler(RequestHandler):
         self.write("getSCookieHandler page info tornado!")
         self.write(sc)
 
+
+# cookie计数
+class CookieNumHandler(RequestHandler):
+    def get(self):
+
+        count = self.get_cookie("count",None)
+        if count:
+            # 第n次访问
+            count = str(int(count)+1)
+            pass
+        else:
+            # 第一次访问
+            # 设置cookie
+            count = '0'
+        self.set_cookie("count",count)
+
+        self.render("cookienum.html",count = count)
+
+    def post(self):
+        pass
