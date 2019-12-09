@@ -22,8 +22,10 @@ settings = {
     'static_path': os.path.join(BASE_DIR, "static"),
     "debug": True,
     # "autoreload" : True
-    "cookie_secret":"j94bbx0zSY6yYkCgawwJ1bzyM4jzDUuKtLyPC/MMmZA=",
     # 这个据说一百亿年才能,用完
+    "cookie_secret":"j94bbx0zSY6yYkCgawwJ1bzyM4jzDUuKtLyPC/MMmZA=",
+    # 开启保护
+    "xsrf_cookies":True
 }
 
 # 配置

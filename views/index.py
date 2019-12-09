@@ -57,18 +57,23 @@ class GetSCookieHandler(RequestHandler):
 class CookieNumHandler(RequestHandler):
     def get(self):
 
-        count = self.get_cookie("count",None)
+        count = self.get_cookie("count","未登录")
+        self.render("cookienum.html",count = count)
+
+# PostFileHandler 用于这个那个
+class PostFileHandler(RequestHandler):
+    def get(self):
+        self.render("postfile.html")
+
+    def post(self):
+        count = self.get_cookie("count", None)
         if count:
             # 第n次访问
-            count = str(int(count)+1)
+            count = str(int(count) + 1)
             pass
         else:
             # 第一次访问
             # 设置cookie
             count = '0'
-        self.set_cookie("count",count)
-
-        self.render("cookienum.html",count = count)
-
-    def post(self):
-        pass
+        self.set_cookie("count", count)
+        self.redirect("/cookienum")

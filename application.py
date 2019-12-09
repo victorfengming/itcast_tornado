@@ -21,15 +21,12 @@ class Application(tornado.web.Application):
             (r"/getscookie", index.GetSCookieHandler),
             # cookie计数,记录浏览器访问次数
             (r"/cookienum", index.CookieNumHandler),
+            # postfile
+            (r"/postfile", index.PostFileHandler),
 
         ]
 
+        # 是不是傻了,这里直接就** 就行了
         super(Application, self).__init__(
-            handlers,
-            # 模板路径
-            template_path=settings["template_path"],
-            # 静态路径
-            static_path=settings["static_path"],
-            # cookie签名
-            cookie_secret=settings["cookie_secret"],
+            handlers,**settings
         )
