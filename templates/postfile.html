@@ -25,9 +25,21 @@
     }
 
     function login() {
-        btn = document.getElementById("btn");
-        console.log("*************");
-        console.log(btn);
+        // 发起ajax请求我们有很多种方式
+        // 发起post请求我们有两种方式,一种是
+        $.post("/postfile",
+            "_xsrf=" + getCookie("_xsrf") + "&username=" + "victor" + "&passwd=" + "123456",
+            // 请求成功后的回调函数
+            function (data) {
+                alert("ok\\(^o^)/~");
+                alert(data);
+            }
+        );
+        // TODO 其实这里要通过DOM元素获取username,和passwd的值的,
+        // TODO 因为这里不是作为重点就写了
+        /**
+         * 这里主要是要带着这个xsrf防护,不然这个是不能给你响应的
+         */
     }
 </script>
 </body>
