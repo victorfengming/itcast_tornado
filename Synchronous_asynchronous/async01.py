@@ -10,44 +10,57 @@
 import time
 import threading
 
-gen = None
+
+def genCoroutine(func):
+    '''
+    这个好多人就屡不清了
+    '''
+    def wapper(*args, **kwargs):
+        '''
+        这样的话这个装饰器就麻烦了,因为我还得要这个全局的gen啊
+        我需要获得多个生成器
+        '''
+        gen1 = func()  # reqA的生成器
+        gen2 = next(gen1)  # longIO的生成器
+
+        # 在这里面创建我的线程
+        # 挂起他
+        def run(g):
+            # 这个就是执行longIO去了
+            res = next(g)
+            try:
+                gen1.send(res)  # 返回给reqA数据
+            except StopIteration as e:
+                # 啥都不干
+                pass
+
+        threading.Thread(
+            target=run, args=(gen2,)
+        ).start()
+
+    return wapper
+
 
 # 添加一个耗时的操作
+# handler获取数据,(数据库,其他服务器,循环耗时)
 def longIO():
-    def run():
-        print("开始耗时操作")
-        time.sleep(3)
-        try:
-            global gen
-            gen.send("victor is wonderful!!!")
-        except StopIteration as e:
-            pass
+    '''
+    现在你只需要知道你的耗时的操作是啥,
+    线程的东西你不用管了
+    tornado都帮你弄好了
+    '''
+    print("开始耗时操作")
+    time.sleep(3)
+    print("结束耗时操作")
+    # 结束耗时操作后的返回数据
+    yield "victor is a cool man"
 
-        print("结束耗时操作")
-    threading.Thread(
-        target=run,
-    ).start()
-# 这个longio这部分 ,就像ajax一样都不用我们来写了
-'''
-这样就会有一个问题,这个run()函数的返回值我们接受不到
-为了解决这个问题,我们需要写一个函数,这个函数叫做回调函数
-'''
-
-# 装饰器还会写么
-def genCoroutine(func):
-    # 这个是带有参数的装饰器
-    def wapper(*args,**kwargs):
-        # 其实说白了还是那三句话
-        global gen
-        gen = func(*args,**kwargs)  # 生成一个生成器
-        next(gen)  # 执行reqA
-    return wapper
 
 @genCoroutine
 def reqA():
     print("开始处理reqA")
     res = yield longIO()
-    print("接受到longIO的数据为：",res)
+    print("接受到longIO的数据为：", res)
     # 这里就相当于挂起了
     print("结束处理reqA")
 
@@ -58,19 +71,13 @@ def reqB():
     time.sleep(1)
     print("结束处理reqB")
 
+
 def main():
-    # 这就是同步在处理
-    # global gen
-    # gen = reqA()    # 生成一个生成器
-    # next(gen)   # 执行reqA
     reqA()
     reqB()
     while True:
-        '''
-        # 如果你要想写死循环,你不要直接写死循环,你得睡一睡
-        # 为什么要睡一睡呢,因为你要是不睡你会发现你的CPU利用率占100%
-        '''
         time.sleep(0.1)
+
 
 if __name__ == '__main__':
     main()
