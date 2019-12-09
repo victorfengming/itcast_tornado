@@ -6,8 +6,9 @@ from config import BASE_DIR, mysql
 
 class Application(tornado.web.Application):
     def __init__(self, settings):
+
         handlers = [
-            (r"/", index.IndexHandler),
+            # (r"/", index.IndexHandler),
 
             # 普通cookie
             (r"/pcookie", index.PcookieHandler),
@@ -26,8 +27,25 @@ class Application(tornado.web.Application):
             # 设置_xsrfcookie
             (r"/setxsrfcookie", index.SetXsrfCookieHandler),
 
-        ]
+            # 登录界面
+            tornado.web.url(r"/login", index.LoginHandler,name='login'),
+            # home页面
+            (r"/home", index.HomeHandler),
+            (r"/cart", index.CartHandler),
 
+            (
+                r"/(.*)$",
+                # 系统这个我们不能用,所以我们继承,
+                # tornado.web.StaticFileHandler,
+                # 让我们自己写这个继承自系统给我们这个
+                index.MyStaticFileHandler,
+                {
+                    "path": os.path.join(BASE_DIR, "static/html"),
+                    "default_filename": "index.html"
+                }
+            ),
+
+        ]
         # 是不是傻了,这里直接就** 就行了
         super(Application, self).__init__(
             handlers,**settings
